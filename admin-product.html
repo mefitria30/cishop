@@ -88,55 +88,82 @@
             <div class="col-md-10 mx-auto">
                 <div class="card">
                     <div class="card-header">
-                        <span>Tambah Pengguna</span>
+                        <span>Produk</span>
+                        <a href="/admin-product-form.html" class="btn btn-sm btn-secondary">Tambah</a>
+
+                        <div class="float-right">
+                            <form action="" method="post">
+                                <div class="input-group">
+                                    <input type="text" name="" id="" class="form-control form-control-sm text-center"
+                                        placeholder="Cari...">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary btn-sm
+                                        " type="submit">
+                                            <i class="fas fa-search"></i></button>
+                                        <a href="#" class="btn btn-secondary btn-sm">
+                                            <i class="fas fa-eraser"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
 
                     <div class="card-body">
-                        <form action="">
-                            <div class="form-group">
-                                <label for="nama">Nama</label>
-                                <input type="text" name="nama" id="nama" class="form-control" required autofocus>
-                                <small class="form-text text-danger">Nama harus diisi</small>
-                            </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Produk</th>
+                                    <th scope="col">Kategori</th>
+                                    <th scope="col">Harga</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <p>
+                                            <img src="https://placehold.co/70x70" alt="">
+                                            Laptops Core i9 2019
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-primary">
+                                            <i class="fas fa-tags"></i>
+                                            Laptops
+                                        </span>
+                                    </td>
+                                    <td>Rp.13.000.000,-</td>
+                                    <td>Tersedia</td>
+                                    <td>
+                                        <form action="#" method="post">
+                                            <a href="#">
+                                                <button class="btn btn-sm">
+                                                    <i class="fas fa-edit text-info"></i>
+                                                </button>
+                                            </a>
+                                            <button class="btn btn-sm" type="submit"
+                                                onclick="return confirm('Are you sure?')">
+                                                <i class="fas fa-trash text-danger"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="label" id="email" class="form-control" required>
-                                <small class="form-text text-danger">Email harus diisi</small>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" name="password" id="password" class="form-control" required>
-                                <small class="form-text text-danger">Password harus diisi</small>
-                            </div>
-                            <div class="form-group">
-                                <label for="role">Role</label>
-                                <select name="role" id="role" class="form-control">
-                                    <option value="admin">Admin</option>
-                                    <option value="member">Member</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <br>
-                                <div class="form-check form-check-inline">
-                                    <input name="status" id="status" type="radio" class="form-check-input" value="1">
-                                    <label for="status" class="form-check-label">Active</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input name="status" id="status" type="radio" class="form-check-input" value="0">
-                                    <label for="status" class="form-check-label">Inactive</label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="photo">Foto</label>
-                                <input type="file" name="photo" id="photo" class="form-control">
-                            </div>
-
-                            <button type="submit" class="btn btn-dark">Simpan</button>
-                        </form>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
