@@ -5,7 +5,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Model extends CI_Model 
 {
-    protected $table = '';
+    protected $table    = '';
+    protected $perPage  = 5;
 
     public function __construct() {
         parent::__construct();
@@ -37,23 +38,57 @@ class MY_Model extends CI_Model
         return $this->form_validation->run();
     }
 
+    /**
+     * Seleksi data per-kolom
+     * Chain Method
+     * 
+     * @param [type] $columns
+     * @return void
+     */
+
     public function select($columns)
     {
         $this->db->select($columns);
         return $this;
     }
 
+    /**
+     * 
+     * Mencari suatu data pada kolom tertentu dengan data yang sama
+     * Chain Method
+     * 
+     * @param [type] $columns
+     * @param [type] $condition
+     * @return void
+     */
     public function where($column, $condition)
     {
         $this->db->where($column, $condition);
         return $this;
     }
 
+    /**
+     * Mencari suatu data pada kolom tertentu dengan data yang mirip
+     * Chain Method
+     * 
+     * @param [type] $column
+     * @param [type] $condition
+     * @return void
+     */
     public function like($column, $condition)
     {
         $this->db->like($column, $condition);
         return $this;
     }
+
+    /**
+     * Mencari suatu data selanjutnya pada kolom tertentu dengan data yang mirip
+     * Chain Method
+     * 
+     * @param [type] $column
+     * @param [type] $condition
+     * @return void
+     */
 
     public function orLike($column, $condition)
     {
@@ -105,6 +140,66 @@ class MY_Model extends CI_Model
         $this->db->delete($this->table);
         return $this->db->affected_rows();
 
+    }
+
+
+    /**
+     * Pagination
+     */
+
+    public function paginate($page)
+    {
+        $this->db->limit(
+            $this->perPage,
+            $this->calculateRealOffSet($page),
+        );
+    }
+
+    public function calculateRealOffSet($page)
+    {
+        if (is_null($page) || empty($page)) {
+            $offset = 0;
+        } else {
+            $offset = ($page * this->perPage) - $this->perPage;
+        }
+
+        return $offset;
+    }
+
+    public function makePagination($baseUrl, $uriSegment, $totalRows = null)
+    {
+        $this->load->library('pagination');
+
+        $config = [
+            'base_url'          =>      $baseUrl,
+            'uri_segment'       =>      $uriSegment,
+            'per_page'          =>      $this->perPage,
+            'total_rows'        =>      $totalRows,
+            'use_page_numbers'  =>      true,
+            
+            'full_tag_open'     =>      '<ul class="pagination">',
+            'full_tag_close'    =>      '</ul>',
+            'attributes'        =>      ['class'     =>     'page-link'],
+            'first_link'        =>      false,
+            'last_link'         =>      false,
+            'first_tag_open'    =>      '<li class="page-item">',
+            'first_tag_close'   =>      '</li>',
+            'prev_link'         =>      '&raquo',
+            'prev_tag_open'     =>      '<li class="page-item">',
+            'prev_tag_close'    =>      '</li>',
+            'next_link'         =>      '&raquo',
+            'next_tag_open'     =>      '<li class="page-item">',
+            'next_tag_close'    =>      '</li>',
+            'last_tag_open'     =>      '<li class="page-item">',
+            'last_tag_close'    =>      '</li>',
+            'cur_tag_open'      =>      '<li class="page-item active"><a href="#" class="page_link">',
+            'cur_tag_close'     =>      '<span class="sr-only">(current)</span></a></li>',
+            'num_tag_open'      =>      '<li class="page-item">',
+            'num_tag_close'     =>      '</li>',
+        ];
+
+        $this->pagination->initialize($config);
+        return $this->pagination->create_links();
     }
 }
 
