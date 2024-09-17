@@ -153,6 +153,8 @@ class MY_Model extends CI_Model
             $this->perPage,
             $this->calculateRealOffSet($page),
         );
+
+        return $this;
     }
 
     public function calculateRealOffSet($page)
