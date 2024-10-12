@@ -22,6 +22,32 @@ class Category extends MY_Controller {
         $this->view($data);
     }
 
+	public function search($page = null)
+	{
+		if (isset($_POST['keyword'])) {
+			$this->session->set_userdata('keyword', $this->input->post('keyword'));
+		} else {
+			redirect(base_url('category'));
+		}
+
+		$keyword	= $this->session->userdata('keyword');
+		$data['title']		= 'Admin: Category';
+		$data['content']	= $this->category->like('title', $keyword)->paginate($page)->get();
+		$data['total_rows']	= $this->category->like('title', $keyword)->count();
+		$data['pagination']	= $this->category->makePagination(
+			base_url('category/search'), 3, $data['total_rows']
+		);
+		$data['page']		= 'pages/category/index';
+		
+		$this->view($data);
+	}
+
+	public function reset()
+	{
+		$this->session->unset_userdata('keyword');
+		redirect(base_url('category'));
+	}
+
 	public function create()
 	{
 		if (!$_POST) {
@@ -75,6 +101,27 @@ class Category extends MY_Controller {
 
 		if ($this->category->where('id', $id)->update($data['input'])) {
 			$this->session->set_flashdata('success', 'Data berhasil diperbaharui!');
+		} else {
+			$this->session->set_flashdata('error', 'Oops! Terjadi suatu kesalahan.');
+		}
+
+		redirect(base_url('category'));
+	}
+
+	public function delete($id)
+	{
+		if(!$_POST){
+			redirect(base_url('category'));
+		}
+
+		if(! $this->category->where('id', $id)->first()){
+			$this->session->set_flashdata('warning', 'Maaf! Data tidak ditemukan');
+			
+			redirect(base_url('category'));
+		}
+
+		if($this->category->where('id', $id)->delete()) {
+			$this->session->set_flashdata('success', 'Data sudah berhasil dihapus!');
 		} else {
 			$this->session->set_flashdata('error', 'Oops! Terjadi suatu kesalahan.');
 		}
