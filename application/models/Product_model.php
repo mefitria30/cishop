@@ -74,9 +74,15 @@ class Product_model extends MY_Model
         if($this->upload->do_upload($fieldName)) {
             return $this->upload->data();
         } else {
-            $this->session->set_flashdata('image_error', $this->upload->display_error('', ''));
+            $this->session->set_flashdata('image_error', $this->upload->display_errors('', ''));
             
             return false;
+        }
+    }
+
+    public function deleteImage($fileName) {
+        if (file_exists("./assets/images/product/$fileName")) {
+            unlink("./assets/images/product/$fileName");
         }
     }
 }
