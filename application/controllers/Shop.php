@@ -2,13 +2,11 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends MY_Controller {
-
-    public function index($page = null)
+class Shop extends MY_Controller {
+    public function sortby($sort, $page = null)
     {
-        $data['title']  = 'Homepage';
-
-        $data['content']    = $this->home->select(
+        $data['title']      = 'Belanja';
+        $data['content']    = $this->shop->select(
                 [
                     'product.id', 
                     'product.description',
@@ -21,18 +19,20 @@ class Home extends MY_Controller {
             )
             ->join('category')
             ->where('product.is_available', 1)
+            ->orderBy('product.price', $sort)
             ->paginate($page)
             ->get();
         
-        $data['total_rows'] = $this->home->where('product.is_available', 1)->count();
-        $data['pagination'] = $this->home->makePagination(
-            base_url('home'), 2, $data['total_rows']
+        $data['total_rows'] = $this->shop->where('product.is_available', 1)->count();
+        $data['pagination'] = $this->shop->makePagination(
+            base_url("shop/sortby/$sort"), 4, $data['total_rows']
         );
         
         $data['page']   = 'pages/home/index';
+
         $this->view($data);
     }
 
 }
 
-/* End of file Home.php */
+/* End of file Shop.php */

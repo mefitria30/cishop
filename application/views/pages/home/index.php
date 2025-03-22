@@ -9,8 +9,9 @@
                             Kategori: <strong>Semua Kategori</strong>
 
                             <span class="float-right">
-                                Urutkan Harga: <a href="" class="badge badge-primary">Termurah</a> | <a href=""
-                                    class="badge badge-primary">Termahal</a>
+                                Urutkan Harga: <a href="<?= base_url("/shop/sortby/asc")?>"
+                                    class="badge badge-primary">Termurah</a> | <a
+                                    href="<?= base_url("/shop/sortby/desc")?>" class="badge badge-primary">Termahal</a>
                             </span>
                         </div>
                     </div>
@@ -18,21 +19,23 @@
             </div>
 
             <div class="row">
+                <?php foreach($content as $row) : ?>
                 <div class="col-md-6">
                     <div class="card mb-3">
-                        <img src="https://placehold.co/100x70" alt="" class="card-img-top">
+                        <img src="<?= $row->image ? base_url("/assets/images/product/$row->image") : base_url("/images/product/default.png") ?>"
+                            height="200" alt="" class="card-img-top">
 
                         <div class="card-body">
                             <h5 class="card-title">
-                                Product Title
+                                <?= $row->product_title; ?>
                             </h5>
                             <p class="card-text">
-                                <strong>Rp.100.000,-</strong>
+                                <strong>Rp.<?= number_format($row->price, 0, ',', '.'); ?>,-</strong>
                             </p>
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                            <p class="card-text"><?= $row->description; ?></p>
                             <a href="" class="badge badge-primary">
                                 <i class="fas fa-tags"></i>
-                                Category
+                                <?= $row->category_title; ?>
                             </a>
                         </div>
 
@@ -50,115 +53,11 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="card mb-3">
-                        <img src="https://placehold.co/100x70" alt="" class="card-img-top">
-
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Product Title
-                            </h5>
-                            <p class="card-text">
-                                <strong>Rp.100.000,-</strong>
-                            </p>
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            <a href="" class="badge badge-primary">
-                                <i class="fas fa-tags"></i>
-                                Category
-                            </a>
-                        </div>
-
-                        <div class="card-footer">
-                            <form action="">
-                                <div class="input-group">
-                                    <input type="number" class="form-control">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary">
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="card mb-3">
-                        <img src="https://placehold.co/100x70" alt="" class="card-img-top">
-
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Product Title
-                            </h5>
-                            <p class="card-text">
-                                <strong>Rp.100.000,-</strong>
-                            </p>
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            <a href="" class="badge badge-primary">
-                                <i class="fas fa-tags"></i>
-                                Category
-                            </a>
-                        </div>
-
-                        <div class="card-footer">
-                            <form action="">
-                                <div class="input-group">
-                                    <input type="number" class="form-control">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary">
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="card mb-3">
-                        <img src="https://placehold.co/100x70" alt="" class="card-img-top">
-
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Product Title
-                            </h5>
-                            <p class="card-text">
-                                <strong>Rp.100.000,-</strong>
-                            </p>
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            <a href="" class="badge badge-primary">
-                                <i class="fas fa-tags"></i>
-                                Category
-                            </a>
-                        </div>
-
-                        <div class="card-footer">
-                            <form action="">
-                                <div class="input-group">
-                                    <input type="number" class="form-control">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary">
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach ?>
             </div>
 
             <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
+                <?= $pagination?>
             </nav>
         </div>
 
