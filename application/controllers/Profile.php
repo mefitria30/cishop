@@ -13,6 +13,7 @@ class Profile extends MY_Controller {
         $this->id   = $this->session->userdata('id');
 
         if(!$is_login){
+            $this->session->set_flashdata('error', 'Please login!');
             redirect(base_url());
             return;
         }

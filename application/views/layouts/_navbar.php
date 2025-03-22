@@ -27,8 +27,8 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="/cart.html" class="nav-link">
-                        <i class="fas fa-shopping-cart"></i> Cart (0)
+                    <a href="<?= base_url('cart')?>" class="nav-link">
+                        <i class="fas fa-shopping-cart"></i> Cart (<?= getCart(); ?>)
                     </a>
                 </li>
 
