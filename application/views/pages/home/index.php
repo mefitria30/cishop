@@ -6,7 +6,10 @@
                 <div class="col-md-12">
                     <div class="card mb-3">
                         <div class="card-boy">
-                            Kategori: <strong>Semua Kategori</strong>
+                            Kategori:
+                            <strong>
+                                <?= isset($category) ? $category : 'Semua Kategori' ?>
+                            </strong>
 
                             <span class="float-right">
                                 Urutkan Harga: <a href="<?= base_url("/shop/sortby/asc")?>"
@@ -33,7 +36,7 @@
                                 <strong>Rp.<?= number_format($row->price, 0, ',', '.'); ?>,-</strong>
                             </p>
                             <p class="card-text"><?= $row->description; ?></p>
-                            <a href="" class="badge badge-primary">
+                            <a href="<?= base_url("/shop/category/$row->category_slug") ?>" class="badge badge-primary">
                                 <i class="fas fa-tags"></i>
                                 <?= $row->category_title; ?>
                             </a>
@@ -69,11 +72,12 @@
                             Pencarian
                         </div>
                         <div class="card-body">
-                            <form action="">
+                            <form action="<?= base_url("/shop/search") ?>" method="POST">
                                 <div class="input-group">
-                                    <input type="text" name="" id="" class="form-control">
+                                    <input type="text" name="keyword" id="" class="form-control"
+                                        value="<?= $this->session->userdata('keyword')?>">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary">
+                                        <button class="btn btn-primary" type="submit">
                                             Cari
                                         </button>
                                     </div>
@@ -83,7 +87,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class=" row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
@@ -91,10 +95,16 @@
                         </div>
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Semua Kategori</li>
-                                <li class="list-group-item">Kategori 1</li>
-                                <li class="list-group-item">Kategori 2</li>
-                                <li class="list-group-item">Kategori 3</li>
+                                <li class="list-group-item">
+                                    <a href="<?= base_url('/')?>">Semua Kategori</a>
+                                </li>
+                                <?php foreach(getCategories() as $category) : ?>
+                                <li class=" list-group-item">
+                                    <a href="<?= base_url("/shop/category/$category->slug") ?>">
+                                        <?= $category->title?>
+                                    </a>
+                                </li>
+                                <?php endforeach ?>
                             </ul>
                         </div>
                     </div>
