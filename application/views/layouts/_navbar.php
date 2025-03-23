@@ -56,7 +56,7 @@
                         <a href="<?= base_url('/profile')?>" class="dropdown-item">
                             Profile
                         </a>
-                        <a href="/orders.html" class="dropdown-item">Orders</a>
+                        <a href="<?= base_url("/myorder") ?>" class="dropdown-item">Orders</a>
                         <a href="<?= base_url('/logout')?>" class="dropdown-item">Logout</a>
                     </div>
                 </li>
