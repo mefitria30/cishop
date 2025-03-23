@@ -18,7 +18,7 @@
                             </li>
                         </ol>
                         <p>Jika sudah, silakan kirimkan bukti transfer dihalaman konfirmasi atau bisa <a
-                                href="<?= base_url("/myorder/detail/$row->invoice") ?>">klik
+                                href="<?= base_url("/myorder/detail/$content->invoice") ?>">klik
                                 disini!</a></p>
                         <a href="<?= base_url('/')?>" class="btn btn-primary"><i class="fas fa-angle-left"></i>
                             Kembali</a>
